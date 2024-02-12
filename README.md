@@ -34,3 +34,5 @@ If you used any sources outside of the lecture notes, class lab files,
 or text book you need to list them here. If you looked something up on
 stackoverflow.com and fail to cite it in this section it will be
 considered plagiarism and be dealt with accordingly. So be safe CITE!
+https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html
+https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html
