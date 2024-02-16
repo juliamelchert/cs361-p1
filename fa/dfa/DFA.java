@@ -103,7 +103,7 @@ public class DFA implements DFAInterface {
         DFAState currState = this.stringState;
         String currString = s;
 
-        while (s.length() > 0) {
+        while (currString.length() > 0) {
             Character currChar = currString.charAt(0);
             ArrayList<Map<Character, DFAState>> currCharTransitions = this.transition.get(currState);
             Boolean transitionExists = false;   // tracks if the machine gets stuck
@@ -150,7 +150,7 @@ public class DFA implements DFAInterface {
     @Override
     public boolean isFinal(String name) {
         boolean bool = false;
-        for(State state : treeState) {
+        for(State state : finalState) {
             if(state.getName().equals(name)) {
                 bool = true;
             }
