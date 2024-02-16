@@ -9,6 +9,7 @@ import java.util.Set;
 
 /**
  *
+ *
  */
 public class DFA implements DFAInterface {
     // Could use Set, LinkedHashSet, TreeSet or HashSet to track alphabet/states
@@ -248,6 +249,9 @@ public class DFA implements DFAInterface {
     @Override
     public DFA swap(char symb1, char symb2) {
         DFA swap = new DFA();
+        if(treeState.isEmpty() || alphabet.isEmpty()) {
+            return swap;
+        }
         swap.copyInitial(stringState);
         swap.setStart(stringState.getName());
 
@@ -303,6 +307,10 @@ public class DFA implements DFAInterface {
      * {@inheritDoc}
      */
     public String toString() {
+        if(treeState.isEmpty() || alphabet.isEmpty()){
+            return "empty";
+        }
+
         StringBuilder var = new StringBuilder("Q={ ");
         String sigmaTemp = "";
         for (String state : qStates) {
