@@ -2,6 +2,13 @@ package fa.dfa;
 
 import fa.State;
 
+/**
+ * Represents a state within a DFA.
+ * Extends the State class to include comparison capabilities to support
+ * in ordering collections.
+ * @author Axel Murillo
+ * @author Julia Melchert
+ */
 public class DFAState extends State implements Comparable<DFAState>{
 
     /**
