@@ -44,6 +44,9 @@ public class DFA implements DFAInterface {
         this.stringState = stringState;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean addState(String name) {
 
@@ -62,6 +65,9 @@ public class DFA implements DFAInterface {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean setFinal(String name) {
         Iterator<DFAState> check = treeState.iterator();
@@ -76,6 +82,9 @@ public class DFA implements DFAInterface {
         return bool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean setStart(String name) {
         Iterator<DFAState> check = treeState.iterator();
@@ -91,12 +100,18 @@ public class DFA implements DFAInterface {
         return bool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addSigma(char symbol) {
         alphabet.add(symbol);
         this.sigma.add(symbol);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean accepts(String s) {
 
@@ -132,11 +147,17 @@ public class DFA implements DFAInterface {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Character> getSigma() {
         return this.alphabet;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public State getState(String name) {
         for(DFAState state : treeState) {
@@ -147,6 +168,9 @@ public class DFA implements DFAInterface {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFinal(String name) {
         boolean bool = false;
@@ -158,11 +182,17 @@ public class DFA implements DFAInterface {
         return bool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isStart(String name) {
         return Objects.equals(stringState.getName(), name);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean addTransition(String fromState, String toState, char symb) {
         boolean bool = false;
@@ -196,6 +226,9 @@ public class DFA implements DFAInterface {
         return bool;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public DFA swap(char symb1, char symb2) {
         DFA swap = new DFA();
@@ -230,10 +263,17 @@ public class DFA implements DFAInterface {
         return swap;
     }
 
+    /**
+     * Copies state passed through to 'stringState' of a DFAState object
+     * @param state DFAState object to be copied
+     */
     private void copyInitial(DFAState state) {
         stringState = state;
     }
 
+    /**
+     * Prints the transitions of a DFAState object
+     */
     public void printTransitions() {
         System.out.println("TRANSITIONS:");
         for(DFAState key : transition.keySet()) {
@@ -243,58 +283,62 @@ public class DFA implements DFAInterface {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String toString() {
         StringBuilder var = new StringBuilder("Q={ ");
         String sigmaTemp = "";
-        for(int i = 0; i < qStates.size(); i++) {
-            var.append(qStates.get(i)).append(" ");
+        for (String state : qStates) {
+            var.append(state).append(" ");
         }
 
-        var.append("}\n Sigma = { ");
-        for(int i = 0; i < sigma.size(); i++) {
-            var.append(sigma.get(i)).append(" ");
+        var.append("}\nSigma = { ");
+        for (Character item : sigma) {
+            var.append(item).append(" ");
         }
 
-        var.append(sigmaTemp).append("}\\ndelta =\\n \\t");
-        for(int i = 0; i < sigma.size(); i++) {
-            var.append(sigma.get(i)).append(" ");
+        var.append(sigmaTemp).append("}\ndelta =\n \t");
+        for (Character value : sigma) {
+            var.append(value).append("\t");
         }
         var.append("\n");
 
-        for(int i = 0; i < qStates.size(); i++) {
+        for (int i = 0; i < qStates.size(); i++) {
             var.append(qStates.get(i)).append("\t");
-            DFAState tempState = (DFAState) this.getState(qStates.get(i));
-            for(int j = 0; j < sigma.size(); j++) {
-                ArrayList<Map<Character, DFAState>> tempTrans = transition.get(tempState);
-                char tempSymb = sigma.get(j);
+            DFAState state = (DFAState) this.getState(qStates.get(i));
+            for (int j = 0; j < sigma.size(); j++) {
+                ArrayList<Map<Character, DFAState>> transitionTemp = transition.get(state);
+                char symbol = sigma.get(j);
 
                 boolean transitionBool = false;
 
-                for(int k = 0; k < tempTrans.size(); k++) {
-                    Map<Character, DFAState> symbTrans = tempTrans.get(k);
+                for (int k = 0; k < transition.size(); k++) {
+                    Map<Character, DFAState> symbolTransition = transitionTemp.get(k);
 
-                    if(symbTrans.containsKey(tempSymb)) {
-                        DFAState next = symbTrans.get(tempTrans);
-                        var.append(next.getName()).append(" ");
+                    if (symbolTransition.containsKey(symbol)) {
+                        DFAState nextState = symbolTransition.get(symbol);
+                        var.append(nextState.getName()).append("\t");
                         transitionBool = true;
                         break;
                     }
-
                 }
 
-                if(!transitionBool) {
+                if (!transitionBool) {
                     var.append("e ");
                 }
+
             }
             var.append("\n");
 
         }
 
         var.append("q0 = ").append(stringState.getName()).append("\n").append("F = { ");
-        for(int i = 0; i < finalS.size(); i++) {
-            var.append(finalS.get(i)).append(" ");
+        for(String aFinal : finalS) {
+            var.append(aFinal).append(" ");
         }
         var.append("}");
-        return String.valueOf(var);
+        return var.toString();
     }
+
 }
