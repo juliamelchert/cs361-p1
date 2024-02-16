@@ -103,31 +103,103 @@ public class DFA implements DFAInterface {
 
     @Override
     public Set<Character> getSigma() {
-        return null;
+        return this.alphabet;
     }
 
     @Override
     public State getState(String name) {
+        for(DFAState state : treeState) {
+            if(state.getName().equals(name)) {
+                return state;
+            }
+        }
         return null;
     }
 
     @Override
     public boolean isFinal(String name) {
-        return false;
+        boolean bool = false;
+        for(State state : treeState) {
+            if(state.getName().equals(name)) {
+                bool = true;
+            }
+        }
+        return bool;
     }
 
     @Override
     public boolean isStart(String name) {
-        return false;
+        return Objects.equals(stringState.getName(), name);
     }
 
     @Override
-    public boolean addTransition(String fromState, String toState, char onSymb) {
-        return false;
+    public boolean addTransition(String fromState, String toState, char symb) {
+        boolean bool = false;
+        DFAState initial = null;
+        DFAState end = null;
+        Iterator<DFAState> temp = treeState.iterator();
+        while(temp.hasNext()) {
+            DFAState curr = temp.next();
+            if(curr.getName().equals(fromState)) {
+                initial = curr;
+            }
+            if(curr.getName().equals(toState)) {
+                end = curr;
+            }
+        }
+
+        if(initial != null && end != null && alphabet.contains(symb)) {
+            bool = true;
+            Map<Character, DFAState> destination = new HashMap<Character, DFAState>();
+            destination.put(symb, end);
+            if(transition.containsKey(initial)) {
+                transition.get(initial).add(destination);
+
+            } else {
+                ArrayList<Map<Character, DFAState>> newTransition = new ArrayList<Map<Character, DFAState>>();
+                newTransition.add(destination);
+                transition.put(initial, newTransition);
+            }
+        }
+
+        return bool;
     }
 
     @Override
     public DFA swap(char symb1, char symb2) {
-        return null;
+        DFA swap = new DFA();
+        swap.copyInitial(stringState);
+        swap.setStart(stringState.getName());
+
+        for(DFAState state : treeState) {
+            swap.addState(state.getName());
+        }
+
+        for(DFAState state : finalState) {
+            swap.setFinal(state.getName());
+        }
+
+        for(Character temp : alphabet) {
+            swap.addSigma(temp.charValue());
+        }
+
+        for(DFAState key : transition.keySet()) {
+            for(Map<Character, DFAState> item : transition.get(key)) {
+                for(Character temp : item.keySet()) {
+                    if(temp == symb1) {
+                        swap.addTransition(key.getName(), item.get(temp).getName(), symb2);
+                    } else if (temp == symb2) {
+                        swap.addTransition(key.getName(), item.get(temp).getName(), symb1);
+                    } else {
+                        swap.addTransition(key.getName(), item.get(temp).getName(), temp);
+                    }
+                }
+            }
+        }
+        return swap;
+    }
+
+    private void copyInitial(DFAState state) {
+        stringState = state;
     }
 }
