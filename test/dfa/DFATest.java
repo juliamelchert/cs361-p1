@@ -405,5 +405,85 @@ public void test3_6() {
 	
 	System.out.println("dfa3Swap accept pass");
 }
-	
+
+//Empty DFA test
+	private DFA dfa4() {
+		DFA dfa = new DFA();
+		dfa.addSigma('0');
+		dfa.addSigma('1');
+
+
+		return dfa;
+	}
+
+	@Test
+	public void test4_1() {
+		DFA dfa = dfa4();
+
+		System.out.println("dfa4 instantiation pass");
+	}
+
+	@Test
+	public void test4_2() {
+		DFA dfa = dfa4();
+		assertEquals(dfa.getSigma(), Set.of('1','0'));
+
+		System.out.println("dfa4 correctness pass");
+	}
+
+	@Test
+	public void test4_3() {
+		DFA dfa = dfa4();
+		assertTrue(dfa.accepts(""));
+		assertFalse(dfa.accepts("10"));
+		assertFalse(dfa.accepts("1111"));
+		assertFalse(dfa.accepts("1010"));
+
+		System.out.println("dfa4 accept pass");
+	}
+
+	@Test
+	public void test4_4() {
+		DFA dfa = dfa4();
+
+		String dfaStr = dfa.toString();
+		String expStr = "Q={}\n"
+				+ "Sigma = {1 0}\n"
+				+ "delta =\n"
+				+ "\n"
+				+ "\n"
+				+ "\n"
+				+ "\n"
+				+ "\n"
+				+ "\n"
+				+ "\n"
+				+ "\n"
+				+ "q0 = \n"
+				+ "F = {}\n";
+
+		assertTrue(dfaStr.replaceAll("\\s", "").equals(expStr.replaceAll("\\s", "")));
+		System.out.println("dfa4 toString pass");
+	}
+
+
+
+	@Test
+	//Redundant test with empty DFA
+	public void test4_5() {
+		DFA dfa = dfa3();
+		DFA dfaSwap = dfa.swap('1', '0');
+		assertTrue(dfa == dfaSwap);
+
+		System.out.println("df41Swap instantiation pass");
+	}
+
+	@Test
+	public void test4_6() {
+		DFA dfa = dfa4();
+		DFA dfaSwap = dfa.swap('1', '0');
+		assertTrue(dfaSwap.accepts(""));
+		assertFalse(dfaSwap.accepts("1010"));
+
+		System.out.println("dfa4Swap accept pass");
+	}
 }
