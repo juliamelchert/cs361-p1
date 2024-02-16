@@ -82,9 +82,10 @@ public class DFA implements DFAInterface {
         boolean bool = false;
         while(check.hasNext()) {
             DFAState curr = check.next();
-            if(check.next().getName().equals(name)) {
+            if(curr.getName().equals(name)) {
                 this.stringState = curr;
                 bool = true;
+                break;
             }
         }
         return bool;
