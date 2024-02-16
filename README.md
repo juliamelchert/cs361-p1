@@ -6,12 +6,24 @@
 
 ## Overview
 
-Concisely explain what the program does. If this exceeds a couple of
-sentences, you're going too far. Generally you should be pulling this
-right from the project specification. Please don't just cut and
-paste, but paraphrase what is stated in the project specification.
+This project uses Java to mimic a deterministic finite automaton (DFA).
 
 ## Reflection
+
+We were able to decipher the given skeleton code well and quickly begin working
+on the project. Our conceptual knowledge of DFAs really helped us complete it. 
+However, our team struggled to work together with differing schedules and lacking
+communication, so that made it difficult to complete the project together. 
+However, near the end, we decided on how to split the work to suit our
+skills and time remaining best, and ended up finishing the project well.
+
+
+
+We used the original project's structure to our advantage in order to break
+functions up and choose data types wisely. For instance, having our transitions
+represented as a hashmap with the states as the keys and a hashmap as the values 
+allowed us to easily see which states had what transitions and on what characters. 
+This was easy to print out to the console for debugging and verification, too.
 
 Write a brief (2-3 paragraph) reflection describing your experience with this 
 project. Answer the following questions (but feel free to add other insights): 
