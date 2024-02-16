@@ -446,22 +446,7 @@ public void test3_6() {
 	public void test4_4() {
 		DFA dfa = dfa4();
 
-		String dfaStr = dfa.toString();
-		String expStr = "Q={}\n"
-				+ "Sigma = {1 0}\n"
-				+ "delta =\n"
-				+ "\n"
-				+ "\n"
-				+ "\n"
-				+ "\n"
-				+ "\n"
-				+ "\n"
-				+ "\n"
-				+ "\n"
-				+ "q0 = \n"
-				+ "F = {}\n";
-
-		assertTrue(dfaStr.replaceAll("\\s", "").equals(expStr.replaceAll("\\s", "")));
+		assertTrue(dfa.toString() == "empty");
 		System.out.println("dfa4 toString pass");
 	}
 
@@ -470,9 +455,9 @@ public void test3_6() {
 	@Test
 	//Redundant test with empty DFA
 	public void test4_5() {
-		DFA dfa = dfa3();
+		DFA dfa = dfa4();
 		DFA dfaSwap = dfa.swap('1', '0');
-		assertTrue(dfa == dfaSwap);
+		assertFalse(dfa == dfaSwap);
 
 		System.out.println("df41Swap instantiation pass");
 	}

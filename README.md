@@ -39,7 +39,8 @@ values added some complexity.
 - If you could go back in time, what would you tell yourself about doing this project?
 We would have told ourselves that it is not as hard as it seems at first! With all of the files 
 and different classes/interfaces, it seems intimidating at first. However, once we started coding, 
-it all fell into place and made sense.
+it all fell into place and made sense. I would also tell myself to start writing junit tests a bit earlier.
+Some tests were getting too complex to write, so they were removed instead of being fully implemented.
 
 ## Compiling and Using
 
@@ -58,3 +59,7 @@ and initialize the DFA object correctly.
 * https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html
 * https://www.geeksforgeeks.org/hashmap-containskey-method-in-java/
 * https://stackoverflow.com/questions/4564414/delete-first-character-of-string-if-it-is-0
+* https://www.geeksforgeeks.org/treeset-in-java-with-examples/
+* https://www.w3schools.com/java/java_arraylist.asp
+* https://stackoverflow.com/questions/25352329/how-to-use-asserttrue
+* https://learn.microsoft.com/en-us/dotnet/api/system.text.stringbuilder.tostring?view=net-8.0
