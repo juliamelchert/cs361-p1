@@ -98,7 +98,37 @@ public class DFA implements DFAInterface {
 
     @Override
     public boolean accepts(String s) {
-        return false;
+
+        DFAState currState = this.stringState;
+        String currString = s;
+
+        while (s.length() > 0) {
+            Character currChar = currString.charAt(0);
+            ArrayList<Map<Character, DFAState>> currCharTransitions = this.transition.get(currState);
+            Boolean transitionExists = false;   // tracks if the machine gets stuck
+
+            for (int i = 0; i < currCharTransitions.size(); i++) {
+                Map<Character, DFAState> currMap = currCharTransitions.get(i);
+
+                // if there's a transition on the current character, advance
+                if (currMap.containsKey(currChar)) {
+                    transitionExists = true;
+                    currState = currMap.get(currChar);
+                    currString = currString.substring(1); // consumes first character
+                }
+            }
+
+            // if all of the transitions were checked for a state and the currChar is not one of those transitions, return false
+            if (transitionExists == false) {
+                return false;
+            }
+        }
+
+        if (this.isFinal(currState.getName())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -201,5 +231,14 @@ public class DFA implements DFAInterface {
 
     private void copyInitial(DFAState state) {
         stringState = state;
+    }
+
+    public void printTransitions() {
+        System.out.println("TRANSITIONS:");
+        for(DFAState key : transition.keySet()) {
+            for(Map<Character, DFAState> item : transition.get(key)) {
+                System.out.println(key + " -> " + item.values() + " on a " + item.keySet());
+            }
+        }
     }
 }
