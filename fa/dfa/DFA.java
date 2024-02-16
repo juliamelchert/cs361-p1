@@ -8,11 +8,12 @@ import java.util.*;
 import java.util.Set;
 
 /**
- *
+ * Represents a deterministic finite automaton (DFA) comprised of DFAState objects and transitions.
+ * Manages the appropriate data for a DFA like the alphabet, states, start/final states, and transition table.
+ * @author Axel Murillo
+ * @author Julia Melchert
  */
 public class DFA implements DFAInterface {
-    // Could use Set, LinkedHashSet, TreeSet or HashSet to track alphabet/states
-    // Transitions could be seperate class or use HashMap to keep track of transitions
     private TreeSet<DFAState> treeState;
     private TreeSet<DFAState> finalState;
     private TreeSet<Character> alphabet;
@@ -178,6 +179,11 @@ public class DFA implements DFAInterface {
         return null;
     }
 
+    /**
+     * Finds and returns the DFAState object with the given name; like getState(), but returns a DFAState
+     * @params      the name for state
+     * @return      the coresponding DFAState object with the name name
+     */
     public DFAState getDFAState(String name) {
         for(DFAState state : treeState) {
             if(state.getName().equals(name)) {
@@ -187,6 +193,9 @@ public class DFA implements DFAInterface {
         return null;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isFinal(String name) {
         boolean bool = false;
@@ -289,6 +298,7 @@ public class DFA implements DFAInterface {
 
     /**
      * Prints the transitions of a DFAState object
+     * @return      nothing, just prints to console
      */
     public void printTransitions() {
         System.out.println("TRANSITIONS:");
