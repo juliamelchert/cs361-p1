@@ -242,4 +242,59 @@ public class DFA implements DFAInterface {
             }
         }
     }
+
+    public String toString() {
+        StringBuilder var = new StringBuilder("Q={ ");
+        String sigmaTemp = "";
+        for(int i = 0; i < qStates.size(); i++) {
+            var.append(qStates.get(i)).append(" ");
+        }
+
+        var.append("}\n Sigma = { ");
+        for(int i = 0; i < sigma.size(); i++) {
+            var.append(sigma.get(i)).append(" ");
+        }
+
+        var.append(sigmaTemp).append("}\\ndelta =\\n \\t");
+        for(int i = 0; i < sigma.size(); i++) {
+            var.append(sigma.get(i)).append(" ");
+        }
+        var.append("\n");
+
+        for(int i = 0; i < qStates.size(); i++) {
+            var.append(qStates.get(i)).append("\t");
+            DFAState tempState = (DFAState) this.getState(qStates.get(i));
+            for(int j = 0; j < sigma.size(); j++) {
+                ArrayList<Map<Character, DFAState>> tempTrans = transition.get(tempState);
+                char tempSymb = sigma.get(j);
+
+                boolean transitionBool = false;
+
+                for(int k = 0; k < tempTrans.size(); k++) {
+                    Map<Character, DFAState> symbTrans = tempTrans.get(k);
+
+                    if(symbTrans.containsKey(tempSymb)) {
+                        DFAState next = symbTrans.get(tempTrans);
+                        var.append(next.getName()).append(" ");
+                        transitionBool = true;
+                        break;
+                    }
+
+                }
+
+                if(!transitionBool) {
+                    var.append("e ");
+                }
+            }
+            var.append("\n");
+
+        }
+
+        var.append("q0 = ").append(stringState.getName()).append("\n").append("F = { ");
+        for(int i = 0; i < finalS.size(); i++) {
+            var.append(finalS.get(i)).append(" ");
+        }
+        var.append("}");
+        return String.valueOf(var);
+    }
 }
