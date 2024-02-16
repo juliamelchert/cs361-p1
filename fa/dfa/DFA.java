@@ -115,7 +115,17 @@ public class DFA implements DFAInterface {
     @Override
     public boolean accepts(String s) {
 
-        DFAState currState = this.stringState;
+        // check for empty DFA/start state
+        if (this.stringState == null) {
+            // account for empty string
+            if (s == "") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        DFAState currState = this.getDFAState(this.stringState.getName());
         String currString = s;
 
         while (currString.length() > 0) {
@@ -168,9 +178,15 @@ public class DFA implements DFAInterface {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    public DFAState getDFAState(String name) {
+        for(DFAState state : treeState) {
+            if(state.getName().equals(name)) {
+                return state;
+            }
+        }
+        return null;
+    }
+
     @Override
     public boolean isFinal(String name) {
         boolean bool = false;
@@ -276,8 +292,8 @@ public class DFA implements DFAInterface {
      */
     public void printTransitions() {
         System.out.println("TRANSITIONS:");
-        for(DFAState key : transition.keySet()) {
-            for(Map<Character, DFAState> item : transition.get(key)) {
+        for(DFAState key : this.transition.keySet()) {
+            for(Map<Character, DFAState> item : this.transition.get(key)) {
                 System.out.println(key + " -> " + item.values() + " on a " + item.keySet());
             }
         }
