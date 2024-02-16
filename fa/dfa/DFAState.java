@@ -2,7 +2,7 @@ package fa.dfa;
 
 import fa.State;
 
-public abstract class DFAState extends State implements Comparable<DFAState>{
+public class DFAState extends State implements Comparable<DFAState>{
 
     /**
      *
