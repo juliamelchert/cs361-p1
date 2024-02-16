@@ -54,7 +54,7 @@ and initialize the DFA object correctly.
 
 ## Sources used
 
-https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html
-https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html
-https://www.geeksforgeeks.org/hashmap-containskey-method-in-java/
-https://stackoverflow.com/questions/4564414/delete-first-character-of-string-if-it-is-0
+* https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html
+* https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html
+* https://www.geeksforgeeks.org/hashmap-containskey-method-in-java/
+* https://stackoverflow.com/questions/4564414/delete-first-character-of-string-if-it-is-0
